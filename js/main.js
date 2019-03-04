@@ -172,7 +172,7 @@ W3 = [0.2,-0.15555555580000002,0.1499999998,-0.2585365854,-0.27058823540000004];
 // Now Classify with new data.
 
 
-// New training set E (unseen to W3):
+// New training set E (Test Data, unseen to W3):
 const E = [
 [1,0.444444444,0.166666667,0.682926829,0.588235294,-1],
 [1,0.444444444,0.166666667,0.658536585,0.529411765,-1],
@@ -221,10 +221,10 @@ let predictions = [];
 let truePositives = 0;
 let correctlyClassifiedRate = 0; 
 
-function classify(dataset_){
+function classify(dataset_, weightVector_){
 	let expectedOutput = null;
 	for( let i = 0; i < totalInstances; i++){
-		expectedOutput = output(dataset_[i], W3);
+		expectedOutput = output(dataset_[i], weightVector_);
 		predictions.push(expectedOutput);
 
 		console.log("Iteration #" + i + ": Target vs Expected: " + dataset_[i][5] + " : " + expectedOutput);
@@ -238,7 +238,7 @@ function classify(dataset_){
 }
 
 // Classify new data
-classify(E);
+classify(E, W3);
 
 correctlyClassifiedRate = (truePositives / totalInstances) * 100;
 console.log("True Positives: " + truePositives);
