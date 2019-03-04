@@ -1,14 +1,10 @@
-// Oliver Gutierrez
-// CSE 516 Machine Learning
-
-// sample Training Set = Boolean And function
-// 			x0, x1, x2, label(target output)
-// const D = [ [1, 0, 0, -1],
-// 						[1, 0, 1, 1],
-// 						[1, 1, 0, 1],
-// 						[1, 1, 1, 1] ];
-
-const D = [
+// x0 	-> bias (always = 1)
+// x2		-> feature 1
+// x3		-> feature 2
+// x4		-> feature 3
+// x5		-> feature 4
+// x6		-> class label (1=Iris-Setosa and -1=Iris-Versicolor)
+const dataset = [
 [1,0.296296296,0.625,0.097560976,0.058823529,1],
 [1,0.222222222,0.416666667,0.097560976,0.058823529,1],
 [1,0.148148148,0.5,0.073170732,0.058823529,1],
@@ -108,106 +104,5 @@ const D = [
 [1,0.518518519,0.375,0.780487805,0.705882353,-1],
 [1,0.703703704,0.375,0.804878049,0.705882353,-1],
 [1,0.296296296,0.208333333,0.487804878,0.588235294,-1],
-[1,0.518518519,0.333333333,0.756097561,0.705882353,-1]
-];
-
-
-// Weight vector corresponding to x0, x1, x2
-const W = [0, 0, 0, 0, 0];
-let trainingRate = 0.1;
-
-function output(instance){
-	let linearSum = 0;
-	let nbFeatures = instance.length -1;
-
-	for(let i = 0; i < nbFeatures; i++){
-		linearSum += W[i] * instance[i];
-	}
-	
-	return ( linearSum > 0 ? 1 : -1 );
-}
-
-function updateWeightVector(instance, error){
-	console.log("inside updateWeightVector, with W= " + W);
-	let maxIter = 100;
-
-	// update for every weight in W
-	for (let j = 0; j < W.length; j++ ){
-		let currentWeight = W[j];
-		let newWeight = 0;
-		let iteration = 0;
-
-		// currentWeight !== newWeight || 
-		// while (currentWeight !== newWeight){
-		// while (iteration <= maxIter){
-		// 	if ( newWeight == currentWeight){
-		// 		W[j] = newWeight;
-		// 		console.log("Weight vector not changed, continue...");
-		// 		break;
-		// 	}
-		// 	console.log("Iteration #" + iteration + " of updating vector" + j + ": " + W[j]);
-		// 	newWeight = currentWeight + trainingRate*error*instance[j];
-		// 	iteration++;
-		// }
-		// W[j] = newWeight;
-
-		W[j] += trainingRate*error*instance[j];
-		console.log("newWeight for w" + j + " is " + W[j]);
-		// console.log( "Weight " + (j+1) " is " + newWeight );
-	}
-
-}
-// console.log( output(D[3]) );
-
-let breakEarly = false;
-function trainModel(D){
-	
-	breakEarly = true;
-	labelPos = D[0].length -1;
-	errorThreshold = 0.0000001;
-
-	// Run perceptron on every instance
-	for (let i = 0; i < D.length; i++ ){
-		console.log("\nRunning on instance #" + i);
-		let expectedOutput	= output(D[i]);
-		let target					= D[i][labelPos];
-		let error 					= target - expectedOutput;
-
-	  console.log("Error before update is " + error);
-
-		// if there's an error, update the weight vectors
-		// Note: error could be negative, so check for error == 0.
-		// if( error > errorThreshold || error < (-1*errorThreshold) ){
-		if( error !== 0){
-			updateWeightVector(D[i], error);
-			breakEarly = false;
-		} else {
-			console.log("no error for instance#" + i);
-		}
-		// console.log("Instance #" + (i + 1) + ": error is " + error);
-
-		expectedOutput = output(D[i]);
-		error = target - expectedOutput;
-	  console.log("Error after update is " + error);
-	}	
-}
-
-let epochs = 5;
-
-for (let index = 0; index < epochs; index++){
-	if ( breakEarly){
-		console.log("+++++++++++++++ FINISHED EARLY ++++++++++++++");
-		break;	
-	}
-	console.log("EPOCH #" + (index + 1) + "==============================================") ;
-	trainModel(D);
-	console.log("\nFinal weight vector: " + W);
-	console.log("Final training set: ");
-	console.dir(D);
-}
-
-
-console.log("\nRunning model on training set:");
-for(let h = 0; h < D.length; h++){
-	console.log("Expected Output for instance#" + (h+1) + " is " + output(D[h]));
-}
+[1,0.518518519,0.333333333,0.756097561,0.705882353,-1] ];
+// console.dir(dataset);
