@@ -122,7 +122,7 @@ function classify(dataset_, weightVector_){
 		if ( expectedOutput === dataset_[i][5]){
 			truePositives++;
 		} else {
-			console.log("False Positive");
+			console.error("False Positive");
 		}
 	}
 	correctlyClassifiedRate = (truePositives / totalInstances) * 100;
