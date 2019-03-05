@@ -1,248 +1,68 @@
 // Oliver Gutierrez
 // CSE 516 Machine Learning
+// Final project: Option 1
+// Binary Classification of Iris Plants Using Single-Layer Perceptron Algorithm
 
-// Dataset: modified Iris-dataset from (http://archive.ics.uci.edu/ml/machine-learning-databases/iris/)
-// One of the three classes was removed to ensure dataset was linearly separable. Additionally, the 
-// values were normalized to be in the range: [0, 1].
-// x0 	-> bias (always = 1)
-// x2		-> feature 1 = Sepal Length
-// x3		-> feature 2 = Sepal Width
-// x4		-> feature 3 = Petal Length
-// x5		-> feature 4 = Petal Width
-// x6		-> class label (1=Iris-Setosa and -1=Iris-Versicolor)
-const D = [
-[1,0.407407407,0.583333333,0.170731707,0.058823529,1],
-[1,0.296296296,0.708333333,0.12195122,0.176470588,1],
-[1,0.111111111,0.666666667,0,0.058823529,1],
-[1,0.296296296,0.541666667,0.170731707,0.235294118,1],
-[1,0.185185185,0.583333333,0.219512195,0.058823529,1],
-[1,0.259259259,0.416666667,0.146341463,0.058823529,1],
-[1,0.259259259,0.583333333,0.146341463,0.176470588,1],
-[1,0.333333333,0.625,0.12195122,0.058823529,1],
-[1,0.333333333,0.583333333,0.097560976,0.058823529,1],
-[1,0.148148148,0.5,0.146341463,0.058823529,1],
-[1,0.185185185,0.458333333,0.146341463,0.058823529,1],
-[1,0.407407407,0.583333333,0.12195122,0.176470588,1],
-[1,0.333333333,0.875,0.12195122,0,1],
-[1,0.444444444,0.916666667,0.097560976,0.058823529,1],
-[1,0.222222222,0.458333333,0.12195122,0.058823529,1],
-[1,0.259259259,0.5,0.048780488,0.058823529,1],
-[1,0.444444444,0.625,0.073170732,0.058823529,1],
-[1,0.222222222,0.666666667,0.097560976,0,1],
-[1,0.037037037,0.416666667,0.073170732,0.058823529,1],
-[1,0.296296296,0.583333333,0.12195122,0.058823529,1],
-[1,0.259259259,0.625,0.073170732,0.117647059,1],
-[1,0.074074074,0.125,0.073170732,0.117647059,1],
-[1,0.037037037,0.5,0.073170732,0.058823529,1],
-[1,0.259259259,0.625,0.146341463,0.294117647,1],
-[1,0.296296296,0.75,0.219512195,0.176470588,1],
-[1,0.185185185,0.416666667,0.097560976,0.117647059,1],
-[1,0.296296296,0.75,0.146341463,0.058823529,1],
-[1,0.111111111,0.5,0.097560976,0.058823529,1],
-[1,0.37037037,0.708333333,0.12195122,0.058823529,1],
-[1,0.259259259,0.541666667,0.097560976,0.058823529,1],
-[1,1,0.5,0.902439024,0.764705882,-1],
-[1,0.777777778,0.5,0.853658537,0.823529412,-1],
-[1,0.962962963,0.458333333,0.951219512,0.823529412,-1],
-[1,0.444444444,0.125,0.731707317,0.705882353,-1],
-[1,0.814814815,0.333333333,0.87804878,0.823529412,-1],
-[1,0.518518519,0.333333333,0.853658537,0.705882353,-1],
-[1,0.740740741,0.541666667,0.902439024,0.882352941,-1],
-[1,0.222222222,0.166666667,0.56097561,0.529411765,-1],
-[1,0.851851852,0.375,0.87804878,0.705882353,-1],
-[1,0.333333333,0.291666667,0.707317073,0.764705882,-1],
-[1,0.259259259,0,0.609756098,0.529411765,-1],
-[1,0.592592593,0.416666667,0.780487805,0.823529412,-1],
-[1,0.62962963,0.083333333,0.731707317,0.529411765,-1],
-[1,0.666666667,0.375,0.902439024,0.764705882,-1],
-[1,0.481481481,0.375,0.634146341,0.705882353,-1],
-[1,0.888888889,0.458333333,0.829268293,0.764705882,-1],
-[1,0.481481481,0.416666667,0.853658537,0.823529412,-1],
-[1,0.555555556,0.291666667,0.756097561,0.529411765,-1],
-[1,0.703703704,0.083333333,0.853658537,0.823529412,-1],
-[1,0.481481481,0.208333333,0.707317073,0.588235294,-1],
-[1,0.592592593,0.5,0.926829268,1,-1],
-[1,0.666666667,0.333333333,0.731707317,0.705882353,-1],
-[1,0.740740741,0.208333333,0.951219512,0.823529412,-1],
-[1,0.666666667,0.333333333,0.902439024,0.647058824,-1],
-[1,0.777777778,0.375,0.804878049,0.705882353,-1],
-[1,0.851851852,0.416666667,0.829268293,0.764705882,-1],
-[1,0.925925926,0.333333333,0.926829268,0.764705882,-1],
-[1,0.888888889,0.416666667,0.975609756,0.941176471,-1],
-[1,0.62962963,0.375,0.853658537,0.823529412,-1],
-[1,0.518518519,0.25,0.609756098,0.529411765,-1]
-];
+// Cache HTML elements:
+let trainModelBtn = document.getElementById("train_model_btn");
+let testDataBtn = document.getElementById("test_data_btn");
+let trainedModelP = document.getElementById("trained_model_p");
 
-// Weight vector corresponding to:
+// Event Listeners:
+trainModelBtn.addEventListener('click', function(){
+	console.clear();
+	// Train with training data D[];
+	let trainedModel = trainModel(D, 10);
+
+	let vectorString = "";
+	for (let i = 0; i < trainedModel.length; i++){
+		vectorString += trainedModel[i];
+		if (i !== trainedModel.length-1) vectorString += ", ";
+	}
+
+	trainedModelP.innerHTML = "W2 = [ " + vectorString + " ]";
+});
+
+testDataBtn.addEventListener('click', function(){
+	// Cache input weight vector:
+	let w0 = document.getElementById("w0").value || 0;
+	let w1 = document.getElementById("w1").value || 0;
+	let w2 = document.getElementById("w2").value || 0;
+	let w3 = document.getElementById("w3").value || 0;
+	let w4 = document.getElementById("w4").value || 0;
+
+	let inputWeightVector = [w0, w1, w2, w3, w4];
+	console.clear();
+
+	// Classify new data
+	classify(E, inputWeightVector);
+});
+
+// Training Data in data.js
+// Test Data in data.js
+
+
+// Initial Weight vector corresponds to every feature
+// in our dataset:
 // 				x0 , x1, x2, x3, x4
 const W = [0,   0,  0,  0,  0];
-let trainingRate = 0.1;
+
 let breakEarly = false;
 let epochs = 5;
 
-// Linear combination -> sign() for a single instance.
-function output(instance_, weightVector_){
-	let linearSum = 0;
-
-	// Last column in dataset is the class label (target output)
-	// don't include it in the linear combination.
-	let nbFeatures = instance_.length -1;
-
-	for(let i = 0; i < nbFeatures; i++){
-		// Sigma( xi * wi)
-		linearSum += weightVector_[i] * instance_[i];
-	}
-	
-	// Sign function returns 1 if sum > 0 and -1 otherwise
-	return ( linearSum > 0 ? 1 : -1 );
-}
-
-// For a single instance_, update all weights based on formula:
-// wi = wi + learningRate * (target_output - expected_output) * xi
-function updateWeightVector(instance_, error){
-	console.log("inside updateWeightVector, with W= " + W);
-
-	// update for every weight in W
-	for (let j = 0; j < W.length; j++ ){
-
-		W[j] += trainingRate*error*instance_[j];
-		console.log("newWeight for w" + j + " is " + W[j]);
-	}
-}
-
-function trainModel(D){
-	breakEarly = true;
-	labelPos = D[0].length -1;
-	errorThreshold = 0.0000001;
-
-	// Run perceptron on every instance
-	for (let i = 0; i < D.length; i++ ){
-		console.log("\nRunning on instance #" + i);
-		let expectedOutput	= output(D[i], W);
-		let target					= D[i][labelPos];
-		let error 					= target - expectedOutput;
-
-	  console.log("Error before update is " + error);
-
-		// if there's an error, update the weight vectors
-		// Note: error could be negative, so check for error == 0.
-		// if( error > errorThreshold || error < (-1*errorThreshold) ){
-		if( error !== 0){
-			updateWeightVector(D[i], error);
-			breakEarly = false;
-		} else {
-			console.log("no error for instance#" + i);
-		}
-		// console.log("Instance #" + (i + 1) + ": error is " + error);
-
-		expectedOutput = output(D[i], W);
-		error = target - expectedOutput;
-	  console.log("Error after update is " + error);
-	}	
-}
-
-/*
-// Train model for a specified number of epochs
-for (let index = 0; index < epochs; index++){
-	if ( breakEarly){
-		console.log("+++++++++++++++ FINISHED EARLY ++++++++++++++");
-		break;	
-	}
-	console.log("EPOCH #" + (index + 1) + "==============================================") ;
-	trainModel(D);
-	console.log("\nFinal weight vector: " + W);
-	console.log("Final training set: ");
-	console.dir(D);
-}
-
-console.log("\nRunning model on training set:");
-for(let h = 0; h < D.length; h++){
-	console.log("Expected Output for instance#" + (h+1) + " is " + output(D[h], W));
-}
-*/
 
 
-//Model from training data (full set):
+
+
+// Saved models from previous data
+//Model from training iris-modified.setAB data (full set):
 W2 = [0.2,-0.06666666680000002,0.2416666666,-0.23414634120000002,-0.22352941200000004];
 
-//Model from training data ( about 60 instances);
+//Model from training iris-modified-setAB.csv data ( about 60 instances);
 W3 = [0.2,-0.15555555580000002,0.1499999998,-0.2585365854,-0.27058823540000004];
 
 
 // Now Classify with new data.
+// Test data , E[], brought it from /js/data.js
 
-
-// New training set E (Test Data, unseen to W3):
-const E = [
-[1,0.444444444,0.166666667,0.682926829,0.588235294,-1],
-[1,0.444444444,0.166666667,0.658536585,0.529411765,-1],
-[1,0.555555556,0.291666667,0.707317073,0.647058824,-1],
-[1,0.62962963,0.291666667,1,0.882352941,-1],
-[1,0.407407407,0.416666667,0.853658537,0.823529412,-1],
-[1,0.62962963,0.583333333,0.853658537,0.882352941,-1],
-[1,0.888888889,0.458333333,0.902439024,0.823529412,-1],
-[1,0.740740741,0.125,0.829268293,0.705882353,-1],
-[1,0.481481481,0.416666667,0.756097561,0.705882353,-1],
-[1,0.444444444,0.208333333,0.731707317,0.705882353,-1],
-[1,0.444444444,0.25,0.829268293,0.647058824,-1],
-[1,0.666666667,0.416666667,0.87804878,0.764705882,-1],
-[1,0.555555556,0.25,0.731707317,0.647058824,-1],
-[1,0.259259259,0.125,0.56097561,0.529411765,-1],
-[1,0.481481481,0.291666667,0.780487805,0.705882353,-1],
-[1,0.518518519,0.416666667,0.780487805,0.647058824,-1],
-[1,0.518518519,0.375,0.780487805,0.705882353,-1],
-[1,0.703703704,0.375,0.804878049,0.705882353,-1],
-[1,0.296296296,0.208333333,0.487804878,0.588235294,-1],
-[1,0.518518519,0.333333333,0.756097561,0.705882353,-1],
-[1,0.296296296,0.625,0.097560976,0.058823529,1],
-[1,0.222222222,0.416666667,0.097560976,0.058823529,1],
-[1,0.148148148,0.5,0.073170732,0.058823529,1],
-[1,0.111111111,0.458333333,0.12195122,0.058823529,1],
-[1,0.259259259,0.666666667,0.097560976,0.058823529,1],
-[1,0.407407407,0.791666667,0.170731707,0.176470588,1],
-[1,0.111111111,0.583333333,0.097560976,0.117647059,1],
-[1,0.259259259,0.583333333,0.12195122,0.058823529,1],
-[1,0.037037037,0.375,0.097560976,0.058823529,1],
-[1,0.222222222,0.458333333,0.12195122,0,1],
-[1,0.407407407,0.708333333,0.12195122,0.058823529,1],
-[1,0.185185185,0.583333333,0.146341463,0.058823529,1],
-[1,0.185185185,0.416666667,0.097560976,0,1],
-[1,0,0.416666667,0.024390244,0,1],
-[1,0.555555556,0.833333333,0.048780488,0.058823529,1],
-[1,0.518518519,1,0.12195122,0.176470588,1],
-[1,0.407407407,0.791666667,0.073170732,0.176470588,1],
-[1,0.296296296,0.625,0.097560976,0.117647059,1],
-[1,0.518518519,0.75,0.170731707,0.117647059,1],
-[1,0.296296296,0.75,0.12195122,0.117647059,1]
-];
-
-let totalInstances = E.length;
-let predictions = [];
-let truePositives = 0;
-let correctlyClassifiedRate = 0; 
-
-function classify(dataset_, weightVector_){
-	let expectedOutput = null;
-	for( let i = 0; i < totalInstances; i++){
-		expectedOutput = output(dataset_[i], weightVector_);
-		predictions.push(expectedOutput);
-
-		console.log("Iteration #" + i + ": Target vs Expected: " + dataset_[i][5] + " : " + expectedOutput);
-		
-		if ( expectedOutput === dataset_[i][5]){
-			truePositives++;
-		} else {
-			console.log("False Positive");
-		}
-	}
-}
-
-// Classify new data
-classify(E, W3);
-
-correctlyClassifiedRate = (truePositives / totalInstances) * 100;
-console.log("True Positives: " + truePositives);
-console.log("Total Instances: " + totalInstances);
-console.log("Accuracy: " + correctlyClassifiedRate + "%");
-
-// console.log( "Correctly Classified Rate: " + correctlyClassifiedRate + "%");
+let correctlyClassifiedRate = 0;

@@ -3,12 +3,57 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Perceptron Classifier</title>
+	<link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
 	<h1>Perceptron Classifier</h1>
 	<h2>CSE 516 Machine Learning</h2>
+	<h3>By Oliver Gutierrez</h3>
 
-	<script src="js/data.js"></script>
-	<script src="js/main.js"></script>
+	<main>
+<!-- 		<section>
+			<label for="dataset-name">Dataset Source:</label>
+			<input type="text" placeholder="iris-modified.arff" value="iris-modified.csv" name="dataset-name"><br><br>
+		</section>
+ -->		<hr>
+
+<!-- 		<section>
+			<h3>Dataset Information</h3>
+			<strong>Dataset:</strong> Iris-modified
+		</section>
+		<hr>
+ -->
+		<section>
+			<h3>Train Model</h3>
+			<button id="train_model_btn">Train Model</button>
+			<h4>Initial Weight Vector:</h4>
+			<p>W1 = [0, 0, 0, 0, 0]</p>
+			<h4>Trained Model:</h4>
+			<p id="trained_model_p"></p>
+		</section>
+		<hr>
+		<section>
+			<h3>Classify Test Data with Model:</h3>
+			<label for="w0">w0 <input type="text" name="w0" id="w0"> </label><br>
+			<label for="w1">w1 <input type="text" name="w1" id="w1"> </label><br>
+			<label for="w2">w2 <input type="text" name="w2" id="w2"> </label><br>
+			<label for="w3">w3 <input type="text" name="w3" id="w3"> </label><br>
+			<label for="w4">w4 <input type="text" name="w4" id="w4"> </label><br>
+			<button id="test_data_btn">Test Data</button>
+		</section>
+
+	</main>
 </body>
+
+
+
+	<!-- Utility functions like output(), sign(), updateWeightVectors() -->
+	<script src="js/functions.js"></script>
+
+	<!-- Full, Training, and Test dataset (Iris-modified) -->
+	<script src="js/data.js"></script>
+
+	<!-- Main js -->
+	<script src="js/main.js"></script>
 </html>
