@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Perceptron Classifier</title>
 
 	<!-- Bootstrap4 CDN: -->
@@ -11,11 +12,13 @@
 </head>
 
 <body>
-	<h1>Perceptron Classifier</h1>
-	<h2>CSE 516 Machine Learning</h2>
-	<h3>By Oliver Gutierrez</h3>
+	<header class="container">
+		<h1>Perceptron Classifier</h1>
+		<h2>CSE 516 Machine Learning</h2>
+		<h3>By Oliver Gutierrez</h3>
+	</header>
 
-	<main>
+	<main class="container">
 		<section>
 			<label for="dataset-name">Dataset Source:</label>
 			<input type="text" placeholder="iris-modified.arff" value="iris-modified.csv" name="dataset-name"><br><br>
@@ -30,7 +33,7 @@
 
 		<section>
 			<h3>Train Model</h3>
-			<button id="train_model_btn">Train Model</button>
+			<button type="button" class="btn btn-dark" id="train_model_btn">Train Model</button>
 			<h4>Initial Weight Vector:</h4>
 			<p>W1 = [0, 0, 0, 0, 0]</p>
 			<h4>Trained Model:</h4>
@@ -44,14 +47,16 @@
 			<label for="w2">w2 <input type="text" name="w2" id="w2"> </label><br>
 			<label for="w3">w3 <input type="text" name="w3" id="w3"> </label><br>
 			<label for="w4">w4 <input type="text" name="w4" id="w4"> </label><br>
-			<button id="test_data_btn">Test Data</button>
+			<button type="button" class="btn btn-primary" id="test_data_btn">Test Data</button>
 		</section>
 
 	</main>
 </body>
 
-
-
+	<!-- Bootsrap js -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<!-- Utility functions like output(), sign(), updateWeightVectors() -->
 	<script src="js/functions.js"></script>
 
