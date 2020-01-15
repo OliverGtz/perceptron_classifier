@@ -19,26 +19,38 @@
 	</header>
 
 	<main class="container">
-		<section>
-			<label for="dataset-name">Dataset Source:</label>
-			<input type="text" placeholder="iris-modified.arff" value="iris-modified.csv" name="dataset-name"><br><br>
-		</section>
+		<div class="row">
+			<div class="col-md-12">
+				<section>
+					<label for="dataset-name">Dataset Source:</label>
+					<input type="text" placeholder="iris-modified.arff" value="iris-modified.csv" name="dataset-name"><br><br>
+				</section>
+			</div>
+		</div>
 		<hr>
 
-		<section>
-			<h3>Dataset Information</h3>
-			<strong>Dataset:</strong> Iris-modified
-		</section>
+		<div class="row">
+			<div class="col-md-12">
+				<section>
+					<h3>Dataset Information</h3>
+					<strong>Dataset:</strong> Iris-modified
+				</section>
+			</div>
+		</div>
 		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<section>
+					<h3>Train Model</h3>
+					<button type="button" class="btn btn-dark" id="train_model_btn">Train Model</button>
+					<h4>Initial Weight Vector:</h4>
+					<p>W1 = [0, 0, 0, 0, 0]</p>
+					<h4>Trained Model:</h4>
+					<p id="trained_model_p"></p>
+				</section>
+			</div>
+		</div>
 
-		<section>
-			<h3>Train Model</h3>
-			<button type="button" class="btn btn-dark" id="train_model_btn">Train Model</button>
-			<h4>Initial Weight Vector:</h4>
-			<p>W1 = [0, 0, 0, 0, 0]</p>
-			<h4>Trained Model:</h4>
-			<p id="trained_model_p"></p>
-		</section>
 		<hr>
 		<section>
 			<h3>Classify Test Data with Model:</h3>
