@@ -8,57 +8,64 @@
 	<!-- Bootstrap4 CDN: -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="css/main.css">
+	<!-- google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oxygen:300,700&display=swap" rel="stylesheet">
+
+	<!-- main css -->
+	<link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-	<header class="container">
-		<h1>Perceptron Classifier</h1>
-		<h2>CSE 516 Machine Learning</h2>
-		<h3>By Oliver Gutierrez</h3>
-	</header>
+	<div class="container">
+		<header>
+			<h1>Perceptron Classifier</h1>
+			<h2>A <strong>Neural Network</strong>
+				<br>
+				Machine Learning Algorithm
+			</h2>
+			<h3>by Oliver Gutierrez</h3>
+		</header>
+	</div>
 
 	<main class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<section>
-					<label for="dataset-name">Dataset Source:</label>
-					<input type="text" placeholder="iris-modified.arff" value="iris-modified.csv" name="dataset-name"><br><br>
-				</section>
-			</div>
-		</div>
-		<hr>
-
-		<div class="row">
-			<div class="col-md-12">
-				<section>
+			<div class="col-md-5">
+				<section class="data-info">
 					<h3>Dataset Information</h3>
-					<strong>Dataset:</strong> Iris-modified
+					<ul>
+						<li><span>Dataset:</span>Iris-modified.csv</li>
+						<li><span>Size:</span>N = 100</li>
+						<li><span>No. Labels:</span>2</li>
+						<li><span>No. Props:</span>5</li>
+					</ul>
 				</section>
+			</div>
+			<div class="col-md-7 train_model">
+				<h3>Initial Weight Vector [0, 0, 0, 0, 0]:</h3>
+				<p>By clicking the button below, the model goes through the training set data and calculates a trained model that will be used to classify new (not seen by the model) data.</p>
+				<button class="btn-train" id="train_model_btn">Train Model</button>
+				<hr class="section-div">
+				<h3>Weight Vectors (Model):</h3>
+				<div class="weights">
+					<em data-vector="1" class="weight-vector-trained">w0 <span></span></em>
+					<em data-vector="2" class="weight-vector-trained">w1 <span></span></em>
+					<em data-vector="3" class="weight-vector-trained">w2 <span></span></em>
+					<em data-vector="4" class="weight-vector-trained">w3 <span></span></em>
+					<em data-vector="5" class="weight-vector-trained">w4 <span></span></em>
+				</div>
 			</div>
 		</div>
 		<hr>
-		<div class="row">
-			<div class="col-md-12">
-				<section>
-					<h3>Train Model</h3>
-					<button type="button" class="btn btn-dark" id="train_model_btn">Train Model</button>
-					<h4>Initial Weight Vector:</h4>
-					<p>W1 = [0, 0, 0, 0, 0]</p>
-					<h4>Trained Model:</h4>
-					<p id="trained_model_p"></p>
-				</section>
-			</div>
-		</div>
-
-		<hr>
-		<section>
+		<section class="test-data-section">
 			<h3>Classify Test Data with Model:</h3>
-			<label for="w0">w0 <input type="text" name="w0" class="weight-vector"> </label><br>
-			<label for="w1">w1 <input type="text" name="w1" class="weight-vector"> </label><br>
-			<label for="w2">w2 <input type="text" name="w2" class="weight-vector"> </label><br>
-			<label for="w3">w3 <input type="text" name="w3" class="weight-vector"> </label><br>
-			<label for="w4">w4 <input type="text" name="w4" class="weight-vector"> </label><br>
+			<div class="weight-vector-input">
+				<label for="w0">w0 </label> <input type="text" name="w0" class="weight-vector">
+				<label for="w1">w1 </label> <input type="text" name="w1" class="weight-vector">
+				<label for="w2">w2 </label> <input type="text" name="w2" class="weight-vector">
+				<label for="w3">w3 </label> <input type="text" name="w3" class="weight-vector">
+				<label for="w4">w4 </label> <input type="text" name="w4" class="weight-vector">	
+			</div>
 			<button type="button" class="btn btn-primary" id="test_data_btn">Test Data</button>
 		</section>
 

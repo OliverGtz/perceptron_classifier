@@ -1,0 +1,31 @@
+header {
+    border: 5px solid white;
+    background-color: white;
+    min-height: 400px;
+    background-image: url(img/ai_header_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: right -100px top 50%;
+    padding-left: 5.5rem;
+    margin-top: 0;
+
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 6.5rem;
+        margin-top: 10rem;
+    }
+    h2{
+        font-family: 'Oxygen';
+        font-weight: 300;
+        font-size: 3.5rem;
+        margin-top: 1.5rem;
+        line-height: 5.5rem;
+        strong{
+            font-weight: 700;
+        }
+    }
+    h3{
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+}

@@ -11,7 +11,8 @@ import { classify, trainModel } from "./functions.js";
 // Cache HTML elements:
 let trainModelBtn = document.getElementById("train_model_btn");
 let testDataBtn = document.getElementById("test_data_btn");
-let trainedModelP = document.getElementById("trained_model_p");
+const trainedModelP = document.getElementById("trained_model_p");
+const trainedModelWeights = document.querySelectorAll('.weight-vector-trained span');
 
 // Initial Weight vector corresponds to every feature in our dataset:
 // 		  x0 , x1, x2, x3, x4
@@ -23,8 +24,10 @@ let epochs = 5;
 function handleTrainBtn(){
 	console.clear();
 	let trainedModel = trainModel(trainingData, epochs, W);
-	
-	trainedModelP.innerHTML = `W2 = [ ${trainedModel.join(", ")} ]`;
+
+	trainedModel.forEach((el, i) => {
+		trainedModelWeights[i].textContent = el.toFixed(4);
+	})
 }
 function handleTestBtn(){
 	// Cache user input for weight vector to classify data with:
